@@ -1,10 +1,11 @@
 import React from 'react';
 import Relay from 'react-relay';
 import Feed from './Feed';
+import './App.css';
 
 const App = ({viewer, feed}) => {
   return (
-    <div>
+    <div className="App">
       <header className="App__header">
         <h1>React News</h1>
         <div>

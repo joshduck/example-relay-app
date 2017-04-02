@@ -1,0 +1,13 @@
+.App {
+  margin: 0 auto;
+  padding: 1em;
+  max-width: 1024px;
+  font-family: sans-serif;
+  color: #333;
+}
+
+.App__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}

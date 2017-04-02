@@ -1,24 +1,25 @@
 .Story {
-  margin: 0 0 1em;
+  margin: 0 0 0.5em;
+  border: 1px solid #ddd;
+  display: flex;
 }
 
 .Story__vote {
-  float: left;
-  height: 3em;
-  width: 3em;
-  margin-right: 0.5em;
-  color: #999;
+  width: 4em;
+  color: white;
   border: none;
-  background: white;
-  border-radius: 0.5em;
+  background: #ddd;
+  flex-shrink: 0;
 }
 
 .Story__content {
+  padding: 0.5em;
   overflow: hidden;
 }
 
 .Story__headline {
-  margin: 0;
+  margin: 0 0 0.25em;
+  font-size: 1em;
 }
 
 .Story__meta {
