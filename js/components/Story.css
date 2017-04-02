@@ -10,6 +10,11 @@
   border: none;
   background: #ddd;
   flex-shrink: 0;
+  cursor: pointer;
+}
+
+.Story__vote:hover {
+  background: #1c86ee;
 }
 
 .Story__content {
