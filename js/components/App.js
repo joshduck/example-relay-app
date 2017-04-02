@@ -2,20 +2,20 @@ import React from 'react';
 import Relay from 'react-relay';
 import Feed from './Feed';
 
-class App extends React.Component {
-  render() {
-    return (
-      <div>
+const App = ({viewer, feed}) => {
+  return (
+    <div>
+      <header className="App__header">
         <h1>React News</h1>
-        <ul>
-          Welcome back, {this.props.viewer.name}.
-        </ul>
+        <div>
+          Welcome back, {viewer.name}.
+        </div>
+      </header>
 
-        <Feed feed={this.props.feed} />
-      </div>
-    );
-  }
-}
+      <Feed feed={feed} />
+    </div>
+  );
+};
 
 export default Relay.createContainer(App, {
   fragments: {
