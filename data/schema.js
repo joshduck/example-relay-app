@@ -32,11 +32,11 @@ import {
 import {
   // Import methods that your schema can use to interact with your database
   User,
-  Widget,
+  NewsItem,
   getUser,
   getViewer,
-  getWidget,
-  getWidgets,
+  getNewsItem,
+  getNewsItems,
 } from './database';
 
 /**
@@ -50,8 +50,8 @@ var {nodeInterface, nodeField} = nodeDefinitions(
     var {type, id} = fromGlobalId(globalId);
     if (type === 'User') {
       return getUser(id);
-    } else if (type === 'Widget') {
-      return getWidget(id);
+    } else if (type === 'NewsItem') {
+      return getNewsItem(id);
     } else {
       return null;
     }
@@ -59,8 +59,8 @@ var {nodeInterface, nodeField} = nodeDefinitions(
   (obj) => {
     if (obj instanceof User) {
       return userType;
-    } else if (obj instanceof Widget)  {
-      return widgetType;
+    } else if (obj instanceof NewsItem)  {
+      return newsItemType;
     } else {
       return null;
     }
@@ -76,24 +76,36 @@ var userType = new GraphQLObjectType({
   description: 'A person who uses our app',
   fields: () => ({
     id: globalIdField('User'),
-    widgets: {
-      type: widgetConnection,
-      description: 'A person\'s collection of widgets',
-      args: connectionArgs,
-      resolve: (_, args) => connectionFromArray(getWidgets(), args),
+    name: {
+      type: GraphQLString,
     },
+    image: {
+      type: GraphQLString,
+    }
   }),
   interfaces: [nodeInterface],
 });
 
-var widgetType = new GraphQLObjectType({
-  name: 'Widget',
-  description: 'A shiny widget',
+var newsItemType = new GraphQLObjectType({
+  name: 'NewsItem',
+  description: 'A news item',
   fields: () => ({
-    id: globalIdField('Widget'),
-    name: {
+    id: globalIdField('NewsItem'),
+    title: {
       type: GraphQLString,
-      description: 'The name of the widget',
+    },
+    href: {
+      type: GraphQLString,
+    },
+    author: {
+      type: userType,
+      resolve: (self, args) => getUser(String(self.author))
+    },
+    commentCount: {
+      type: GraphQLInt,
+    },
+    likeCount: {
+      type: GraphQLInt,
     },
   }),
   interfaces: [nodeInterface],
@@ -102,8 +114,8 @@ var widgetType = new GraphQLObjectType({
 /**
  * Define your own connection types here
  */
-var {connectionType: widgetConnection} =
-  connectionDefinitions({name: 'Widget', nodeType: widgetType});
+var {connectionType: newsItemConnectionType} =
+ connectionDefinitions({name: 'NewsItem', nodeType: newsItemType});
 
 /**
  * This is the type that will be the root of our query,
@@ -113,6 +125,10 @@ var queryType = new GraphQLObjectType({
   name: 'Query',
   fields: () => ({
     node: nodeField,
+    news: {
+      type: newsItemConnectionType,
+      resolve: (_, args) => connectionFromArray(getNewsItems(), args),
+    },
     // Add your own root fields here
     viewer: {
       type: userType,

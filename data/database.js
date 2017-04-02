@@ -7,27 +7,33 @@
  *  of patent rights can be found in the PATENTS file in the same directory.
  */
 
+import mock from './mock';
+
 // Model types
 class User {}
-class Widget {}
+class NewsItem {}
 
 // Mock data
-var viewer = new User();
-viewer.id = '1';
-viewer.name = 'Anonymous';
-var widgets = ['What\'s-it', 'Who\'s-it', 'How\'s-it'].map((name, i) => {
-  var widget = new Widget();
-  widget.name = name;
-  widget.id = `${i}`;
-  return widget;
-});
+var users = mock.user.map((data, i) => {
+  var user = new User();
+  Object.assign(user, data);
+  user.id = String(i);
+  return user;
+})
+
+var newsItems = mock.newsItem.map((data, i) => {
+  var newsItem = new NewsItem();
+  Object.assign(newsItem, data);
+  newsItem.id = String(i);
+  return newsItem;
+})
 
 module.exports = {
   // Export methods that your schema can use to interact with your database
-  getUser: (id) => id === viewer.id ? viewer : null,
-  getViewer: () => viewer,
-  getWidget: (id) => widgets.find(w => w.id === id),
-  getWidgets: () => widgets,
+  getUser: (id) => users.find(u => u.id === id),
+  getViewer: () => users.find('0'),
+  getNewsItem: (id) => newsItems.find(n => n.id === id),
+  getNewsItems: () => newsItems,
   User,
-  Widget,
+  NewsItem,
 };
