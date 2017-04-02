@@ -12,6 +12,7 @@ import mock from './mock';
 // Model types
 class User {}
 class Story {}
+class Feed {}
 
 // Mock data
 var users = mock.user.map((data, i) => {
@@ -36,4 +37,5 @@ module.exports = {
   getStories: () => stories,
   User,
   Story,
+  Feed,
 };

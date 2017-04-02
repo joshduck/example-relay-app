@@ -33,6 +33,7 @@ import {
   // Import methods that your schema can use to interact with your database
   User,
   Story,
+  Feed,
   getUser,
   getViewer,
   getStory,
@@ -52,6 +53,8 @@ var {nodeInterface, nodeField} = nodeDefinitions(
       return getUser(id);
     } else if (type === 'Story') {
       return getStory(id);
+    } else if (type === 'Feed') {
+      return new Feed();
     } else {
       return null;
     }
@@ -61,6 +64,8 @@ var {nodeInterface, nodeField} = nodeDefinitions(
       return userType;
     } else if (obj instanceof Story)  {
       return storyType;
+    } else if (obj instanceof Feed) {
+      return feedType;
     } else {
       return null;
     }
@@ -93,9 +98,11 @@ var feedType = new GraphQLObjectType({
     id: globalIdField('Feed'),
     stories: {
       type: storyConnectionType,
+      args: connectionArgs,
       resolve: (_, args) => connectionFromArray(getStories(), args),
     }
-  })
+  }),
+  interfaces: [nodeInterface],
 });
 
 var storyType = new GraphQLObjectType({

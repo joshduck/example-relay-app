@@ -11,7 +11,7 @@ module.exports = {
     {
       name: 'Wei',
       image: 'http://lorempixel.com/200/200/cats/3/'
-    }
+    },
   ],
   story: [
     {
@@ -55,6 +55,13 @@ module.exports = {
       author: 1,
       likeCount: 1,
       commentCount: 2
-    }
+    },
+    {
+      title: 'React Native for Windows 3.1',
+      href: 'http://example.com/',
+      author: 1,
+      likeCount: 1,
+      commentCount: 2
+    },
   ]
 };

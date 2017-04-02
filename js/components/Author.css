@@ -3,4 +3,5 @@
   height: 1.5em;
   margin-right: 0.25em;
   vertical-align: middle;
+  filter: grayscale(100%);
 }
