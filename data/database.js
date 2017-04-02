@@ -31,7 +31,7 @@ var newsItems = mock.newsItem.map((data, i) => {
 module.exports = {
   // Export methods that your schema can use to interact with your database
   getUser: (id) => users.find(u => u.id === id),
-  getViewer: () => users.find('0'),
+  getViewer: () => users[0],
   getNewsItem: (id) => newsItems.find(n => n.id === id),
   getNewsItems: () => newsItems,
   User,

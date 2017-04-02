@@ -1,0 +1,38 @@
+.NewsItem {
+  margin: 0 0 1em;
+}
+
+.NewsItem__vote {
+  float: left;
+  height: 3em;
+  width: 3em;
+  margin-right: 0.5em;
+  color: #999;
+  border: none;
+  background: white;
+  border-radius: 0.5em;
+}
+
+.NewsItem__content {
+  overflow: hidden;
+}
+
+.NewsItem__headline {
+  margin: 0;
+}
+
+.NewsItem__meta {
+  display: flex;
+  width: 100%;
+  align-items: baseline;
+}
+
+.NewsItem__meta > * {
+  margin-right: 0.3em;
+}
+
+.NewsItem__meta,
+.NewsItem__meta > a {
+  font-size: 0.9em;
+  color: #999;
+}
