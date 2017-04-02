@@ -40,12 +40,12 @@
               "deprecationReason": null
             },
             {
-              "name": "news",
+              "name": "feed",
               "description": null,
               "args": [],
               "type": {
                 "kind": "OBJECT",
-                "name": "NewsItemConnection",
+                "name": "Feed",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -107,7 +107,7 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
-              "name": "NewsItem",
+              "name": "Story",
               "ofType": null
             },
             {
@@ -119,7 +119,46 @@
         },
         {
           "kind": "OBJECT",
-          "name": "NewsItemConnection",
+          "name": "Feed",
+          "description": "A person who uses our app",
+          "fields": [
+            {
+              "name": "id",
+              "description": "The ID of an object",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "stories",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "StoryConnection",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "StoryConnection",
           "description": "A connection to a list of items.",
           "fields": [
             {
@@ -147,7 +186,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "NewsItemEdge",
+                  "name": "StoryEdge",
                   "ofType": null
                 }
               },
@@ -249,7 +288,7 @@
         },
         {
           "kind": "OBJECT",
-          "name": "NewsItemEdge",
+          "name": "StoryEdge",
           "description": "An edge in a connection.",
           "fields": [
             {
@@ -258,7 +297,7 @@
               "args": [],
               "type": {
                 "kind": "OBJECT",
-                "name": "NewsItem",
+                "name": "Story",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -288,8 +327,8 @@
         },
         {
           "kind": "OBJECT",
-          "name": "NewsItem",
-          "description": "A news item",
+          "name": "Story",
+          "description": "A news story",
           "fields": [
             {
               "name": "id",

@@ -1,8 +1,8 @@
-.NewsItem {
+.Story {
   margin: 0 0 1em;
 }
 
-.NewsItem__vote {
+.Story__vote {
   float: left;
   height: 3em;
   width: 3em;
@@ -13,26 +13,26 @@
   border-radius: 0.5em;
 }
 
-.NewsItem__content {
+.Story__content {
   overflow: hidden;
 }
 
-.NewsItem__headline {
+.Story__headline {
   margin: 0;
 }
 
-.NewsItem__meta {
+.Story__meta {
   display: flex;
   width: 100%;
   align-items: baseline;
 }
 
-.NewsItem__meta > * {
+.Story__meta > * {
   margin-right: 0.3em;
 }
 
-.NewsItem__meta,
-.NewsItem__meta > a {
+.Story__meta,
+.Story__meta > a {
   font-size: 0.9em;
   color: #999;
 }

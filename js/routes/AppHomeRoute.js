@@ -4,7 +4,12 @@ export default class extends Relay.Route {
   static queries = {
     viewer: () => Relay.QL`
       query {
-        viewer
+        viewer,
+      }
+    `,
+    feed: () => Relay.QL`
+      query {
+        feed,
       }
     `,
   };

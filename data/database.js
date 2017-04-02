@@ -11,7 +11,7 @@ import mock from './mock';
 
 // Model types
 class User {}
-class NewsItem {}
+class Story {}
 
 // Mock data
 var users = mock.user.map((data, i) => {
@@ -21,19 +21,19 @@ var users = mock.user.map((data, i) => {
   return user;
 })
 
-var newsItems = mock.newsItem.map((data, i) => {
-  var newsItem = new NewsItem();
-  Object.assign(newsItem, data);
-  newsItem.id = String(i);
-  return newsItem;
+var stories = mock.story.map((data, i) => {
+  var story = new Story();
+  Object.assign(story, data);
+  story.id = String(i);
+  return story;
 })
 
 module.exports = {
   // Export methods that your schema can use to interact with your database
   getUser: (id) => users.find(u => u.id === id),
   getViewer: () => users[0],
-  getNewsItem: (id) => newsItems.find(n => n.id === id),
-  getNewsItems: () => newsItems,
+  getStory: (id) => stories.find(n => n.id === id),
+  getStories: () => stories,
   User,
-  NewsItem,
+  Story,
 };

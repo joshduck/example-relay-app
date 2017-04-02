@@ -13,7 +13,7 @@ module.exports = {
       image: 'http://lorempixel.com/200/200/cats/3/'
     }
   ],
-  newsItem: [
+  story: [
     {
       title: 'React v15.0',
       href: 'http://example.com/',

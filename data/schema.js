@@ -32,11 +32,11 @@ import {
 import {
   // Import methods that your schema can use to interact with your database
   User,
-  NewsItem,
+  Story,
   getUser,
   getViewer,
-  getNewsItem,
-  getNewsItems,
+  getStory,
+  getStories,
 } from './database';
 
 /**
@@ -50,8 +50,8 @@ var {nodeInterface, nodeField} = nodeDefinitions(
     var {type, id} = fromGlobalId(globalId);
     if (type === 'User') {
       return getUser(id);
-    } else if (type === 'NewsItem') {
-      return getNewsItem(id);
+    } else if (type === 'Story') {
+      return getStory(id);
     } else {
       return null;
     }
@@ -59,8 +59,8 @@ var {nodeInterface, nodeField} = nodeDefinitions(
   (obj) => {
     if (obj instanceof User) {
       return userType;
-    } else if (obj instanceof NewsItem)  {
-      return newsItemType;
+    } else if (obj instanceof Story)  {
+      return storyType;
     } else {
       return null;
     }
@@ -86,11 +86,23 @@ var userType = new GraphQLObjectType({
   interfaces: [nodeInterface],
 });
 
-var newsItemType = new GraphQLObjectType({
-  name: 'NewsItem',
-  description: 'A news item',
+var feedType = new GraphQLObjectType({
+  name: 'Feed',
+  description: 'A person who uses our app',
   fields: () => ({
-    id: globalIdField('NewsItem'),
+    id: globalIdField('Feed'),
+    stories: {
+      type: storyConnectionType,
+      resolve: (_, args) => connectionFromArray(getStories(), args),
+    }
+  })
+});
+
+var storyType = new GraphQLObjectType({
+  name: 'Story',
+  description: 'A news story',
+  fields: () => ({
+    id: globalIdField('Story'),
     title: {
       type: GraphQLString,
     },
@@ -114,8 +126,8 @@ var newsItemType = new GraphQLObjectType({
 /**
  * Define your own connection types here
  */
-var {connectionType: newsItemConnectionType} =
- connectionDefinitions({name: 'NewsItem', nodeType: newsItemType});
+var {connectionType: storyConnectionType} =
+ connectionDefinitions({name: 'Story', nodeType: storyType});
 
 /**
  * This is the type that will be the root of our query,
@@ -125,9 +137,9 @@ var queryType = new GraphQLObjectType({
   name: 'Query',
   fields: () => ({
     node: nodeField,
-    news: {
-      type: newsItemConnectionType,
-      resolve: (_, args) => connectionFromArray(getNewsItems(), args),
+    feed: {
+      type: feedType,
+      resolve: () => ({}),
     },
     // Add your own root fields here
     viewer: {

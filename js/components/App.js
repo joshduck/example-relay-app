@@ -1,16 +1,17 @@
 import React from 'react';
 import Relay from 'react-relay';
-import News from './News';
+import Feed from './Feed';
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>Widget list</h1>
-        <News />
+        <h1>React News</h1>
         <ul>
-          {this.props.viewer.name}
+          Welcome back, {this.props.viewer.name}.
         </ul>
+
+        <Feed feed={this.props.feed} />
       </div>
     );
   }
@@ -21,6 +22,12 @@ export default Relay.createContainer(App, {
     viewer: () => Relay.QL`
       fragment on User {
         name
+      }
+    `,
+
+    feed: () => Relay.QL`
+      fragment on Feed {
+        ${Feed.getFragment('feed')}
       }
     `,
   },
