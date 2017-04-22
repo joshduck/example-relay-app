@@ -1,0 +1,12 @@
+.LikeButton {
+  width: 4.5em;
+  color: white;
+  border: none;
+  background: #ddd;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.LikeButton:hover {
+  background: #1c86ee;
+}

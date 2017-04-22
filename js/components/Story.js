@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import Relay from 'react-relay';
 import Author from './Author';
+import LikeButton from './LikeButton';
 import './Story.css';
 
 const Story = ({story}) => {
+
   return (
     <div className="Story">
-      <button className="Story__vote">▲</button>
+      <LikeButton story={story} />
       <div className="Story__content">
         <h2 className="Story__headline">
           {story.title}
@@ -25,9 +27,8 @@ export default Relay.createContainer(Story, {
   fragments: {
     story: () => Relay.QL`
       fragment on Story {
-        id,
+        ${LikeButton.getFragment('story')},
         title,
-        href,
         commentCount,
         likeCount,
         author {

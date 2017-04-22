@@ -4,19 +4,6 @@
   display: flex;
 }
 
-.Story__vote {
-  width: 4.5em;
-  color: white;
-  border: none;
-  background: #ddd;
-  flex-shrink: 0;
-  cursor: pointer;
-}
-
-.Story__vote:hover {
-  background: #1c86ee;
-}
-
 .Story__content {
   padding: 0.5em;
   overflow: hidden;
