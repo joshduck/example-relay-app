@@ -5,7 +5,7 @@ import './Author.css';
 const Author = ({user}) =>{
   return (
     <div className="Author">
-      <img src={user.image} alt={`${user.name} profile picture`} className="Author__image" />
+      <img src={user.image} className="Author__image" alt="Profile picture" />
       {user.name}
     </div>
   );

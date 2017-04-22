@@ -130,6 +130,25 @@ var storyType = new GraphQLObjectType({
   interfaces: [nodeInterface],
 });
 
+var likeStoryMutation = mutationWithClientMutationId({
+  name: 'LikeStory',
+  inputFields: {
+    id: { type: new GraphQLNonNull(GraphQLID) }
+  },
+  outputFields: {
+    story: {
+      type: storyType,
+      resolve: ({storyID}) => getStory(storyID),
+    }
+  },
+  mutateAndGetPayload: ({id}) => {
+    const storyID = fromGlobalId(id).id;
+    const story = getStory(storyID);
+    story.likeCount++;
+    return { storyID };
+  }
+})
+
 /**
  * Define your own connection types here
  */
@@ -163,7 +182,7 @@ var queryType = new GraphQLObjectType({
 var mutationType = new GraphQLObjectType({
   name: 'Mutation',
   fields: () => ({
-    // Add your own mutations here
+    likeStory: likeStoryMutation
   })
 });
 
@@ -173,6 +192,5 @@ var mutationType = new GraphQLObjectType({
  */
 export var Schema = new GraphQLSchema({
   query: queryType,
-  // Uncomment the following after adding some mutation fields:
-  // mutation: mutationType
+  mutation: mutationType
 });
